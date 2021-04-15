@@ -22,26 +22,30 @@ jobs:
       run: |
              git config --global user.email "${{ secrets.EMAIL }}"
              git config --global user.name "$user" 
+             sudo apt install expect -y
              sudo apt-get install -y apt-transport-https && \
-             sudo apt-get update && \
-             sudo apt-get install -y dotnet-sdk-5.0
-             git clone https://github.com/cytoo/Rust-5X bot
-             cd bot
-             git clone https://github.com/erfanoabdi/ErfanGSIs
-             curl -sL https://git.io/file-transfer | sh
-             export TELOXIDE_TOKEN=$token
-             export CHANNEL=786277405
-             export OWNER_ID=786277405
-             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -y | sh
-             cargo run --release
+             sudo apt-get update && sudo apt-get upgrade
+             git clone https://cytoo:$password@github.com/cytoo/grpscan.git bot;cd bot
+             pip3 install -r requirements.txt
+             python3 main.py
+             git add .
+             git commit -m "bruh"
+             expect -c "
+             spawn git push -f 
+             expect \"Username\"
+             send \"cytoo\r\"
+             expect \"Password\"
+             send \"${{ secrets.PASSWORD }}\r\"
+             expect \"master -> master\"
+             set timeout -10
+             interact"
              
     - name: loop
       continue-on-error: true
       timeout-minutes: 5
       run: | 
         mkdir bruh;cd bruh
-        sudo apt install expect -y
-        git clone https://github.com/cytoo/runner nerd
+        git clone https://github.com/CytolyticTrashCan/runner nerd
         cd nerd
         echo "lool" >> k.txt
         git add .
