@@ -4,7 +4,7 @@ on: [push]
 
 env:
   password: ${{ secrets.PASSWORD }}
-  user: cytoo
+  user: CytolyticTrashCan
 
 jobs:
   build:
@@ -26,24 +26,24 @@ jobs:
              sudo apt install expect -y
              git clone https://cytoo:$password@github.com/cytoo/grpscan.git bot;cd bot
              pip3 install -r requirements.txt
-             python3 main.py
-             git add .
-             git commit -m "bruh"
-             expect -c "
-             spawn git push -f 
-             expect \"Username\"
-             send \"cytoo\r\"
-             expect \"Password\"
-             send \"${{ secrets.PASSWORD }}\r\"
-             expect \"master -> master\"
-             set timeout -10
-             interact"
+             python3 main.py"
              
     - name: loop
       continue-on-error: true
       timeout-minutes: 5
       run: | 
         mkdir bruh;cd bruh
+         git add .
+         git commit -m "bruh"
+         expect -c "
+         spawn git push -f 
+         expect \"Username\"
+         send \"CytolyticTrashCan\r\"
+         expect \"Password\"
+         send \"${{ secrets.PASSWORD }}\r\"
+         expect \"master -> master\"
+         set timeout -10
+         interact
         git clone https://github.com/CytolyticTrashCan/runner nerd
         cd nerd
         echo "lool" >> k.txt
@@ -52,7 +52,7 @@ jobs:
         expect -c "
         spawn git push -f 
         expect \"Username\"
-        send \"cytoo\r\"
+        send \"CytolyticTrashCan\r\"
         expect \"Password\"
         send \"${{ secrets.PASSWORD }}\r\"
         expect \"master -> master\"
